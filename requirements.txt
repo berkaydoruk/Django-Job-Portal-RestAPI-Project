@@ -13,3 +13,4 @@ drf_yasg
 django-money
 django-extensions
 watchdog
+pycountry

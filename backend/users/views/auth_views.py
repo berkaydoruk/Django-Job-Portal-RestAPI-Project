@@ -63,10 +63,12 @@ class UserLoginApi(APIView):
         )
 
         user.last_login = datetime.datetime.now()
+        user.is_online = True
         user.save()
 
         response.data = [{
             'jwt': token,
+            'email': user.email,
             'role': user.role
         }]
 
@@ -83,6 +85,7 @@ class LogoutApi(APIView):
         
         payload = jwt.decode(token, 'secret', algorithms=['HS256'])
         user = User.objects.get(id=payload['id'])
+        user.is_online = False
 
         response.data = {
             'message': 'Logged out successfully.',

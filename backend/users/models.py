@@ -22,6 +22,7 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=30)
     phone_number = models.CharField(max_length=15, unique=True)
     role = models.CharField()
+    is_online = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
@@ -29,4 +30,4 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ["first_name", "last_name", "role"]
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} ({self.email}) - {self.get_role_display()}"
+        return f"{self.first_name} {self.last_name} ({self.email}) - {self.role}"
